@@ -41,6 +41,8 @@
     "packageFolder": "com/mycompany/myapp",
     "jwtSecretKey": "Nzc0MDVkYTg4MDMzOTlmY2ZkODkzNTk5NWRhZGI0ZjY5MmFjOTMwNDJiNDI0YjQyNzRkMjZmOGU2MGFhYWFlYTlhZDA3MGE3YjgyZjlmOTRmZmEwNzU1NzUzNGVmODQwMGUzODQ4ZTY1YTkxZDc2MGI2Mjk5MDhhZWMyMWYzNzk=",
     "clientPackageManager": "npm",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1620912334000,
+    "entities": ["Calendar", "Event"]
   }
 }
