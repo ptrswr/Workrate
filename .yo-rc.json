@@ -40,6 +40,8 @@
     "packageFolder": "com/mycompany/myapp",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1620918107000,
+    "entities": ["Calendar"]
   }
 }
