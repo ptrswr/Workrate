@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Team.
+    -->
+    <changeSet id="20210514150414-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="calendar_id"
+                                 baseTableName="team"
+                                 constraintName="fk_team__calendar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calendar"/>
+
+        <addForeignKeyConstraint baseColumnNames="leader_id"
+                                 baseTableName="team"
+                                 constraintName="fk_team__leader_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="userid"
+                                 baseTableName="membership"
+                                 constraintName="fk_member_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="teamid"
+                                 baseTableName="membership"
+                                 constraintName="fk_member_team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+
+        <addForeignKeyConstraint baseColumnNames="calendar_id"
+                                 baseTableName="jhi_user"
+                                 constraintName="fk_user_calendar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calendar"/>
+        <addPrimaryKey tableName="membership" columnNames="userid, teamid"/>
+
+    </changeSet>
+</databaseChangeLog>

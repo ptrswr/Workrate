@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-event-heading" data-cy="EventCreateUpdateHeading">Create or edit a Event</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_start_date">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_start_date"
+              data-cy="start_date"
+              type="datetime-local"
+              class="form-control"
+              name="start_date"
+              formControlName="start_date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('start_date')!.invalid && (editForm.get('start_date')!.dirty || editForm.get('start_date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('start_date')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('start_date')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_end_date">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_end_date"
+              data-cy="end_date"
+              type="datetime-local"
+              class="form-control"
+              name="end_date"
+              formControlName="end_date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_calendar">Calendar</label>
+          <select class="form-control" id="field_calendar" data-cy="calendar" name="calendar" formControlName="calendar">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="calendarOption.id === editForm.get('calendar')!.value?.id ? editForm.get('calendar')!.value : calendarOption"
+              *ngFor="let calendarOption of calendarsSharedCollection; trackBy: trackCalendarById"
+            >
+              {{ calendarOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

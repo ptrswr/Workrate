@@ -41,7 +41,7 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1620918107000,
-    "entities": ["Calendar"]
+    "lastLiquibaseTimestamp": 1621004654000,
+    "entities": ["Calendar", "Event", "Team"]
   }
 }
