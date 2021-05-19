@@ -2,6 +2,7 @@ package com.mycompany.myapp.service.dto;
 
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Calendar;
 import com.mycompany.myapp.domain.User;
 import java.time.Instant;
 import java.util.Set;
@@ -48,6 +49,16 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+
+    private Calendar calendar;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -65,6 +76,7 @@ public class AdminUserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.calendar = user.getCalendar();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
@@ -187,6 +199,7 @@ public class AdminUserDTO {
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
+            ", calendar=" + calendar +
             ", authorities=" + authorities +
             "}";
     }

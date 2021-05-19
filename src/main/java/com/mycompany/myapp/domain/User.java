@@ -60,6 +60,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "image_url", length = 256)
     private String imageUrl;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Calendar calendar;
+
+    public Calendar getCalendar() {
+        return this.calendar;
+    }
+
+    public User calendar(Calendar calendar) {
+        this.setCalendar(calendar);
+        return this;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
     @JsonIgnore
     @ManyToMany
     @JoinTable(
