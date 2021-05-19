@@ -23,6 +23,21 @@
             <column name="end_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="start_time" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_time" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="color" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_all_day" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="recurring_day" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="calendar_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -51,6 +66,11 @@
             <column name="title" type="string"/>
             <column name="start_date" type="${datetimeType}"/>
             <column name="end_date" type="${datetimeType}"/>
+            <column name="start_time" type="string"/>
+            <column name="end_time" type="string"/>
+            <column name="color" type="string"/>
+            <column name="is_all_day" type="boolean"/>
+            <column name="recurring_day" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

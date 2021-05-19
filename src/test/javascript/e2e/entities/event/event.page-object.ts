@@ -33,6 +33,11 @@ export class EventUpdatePage {
   titleInput = element(by.id('field_title'));
   start_dateInput = element(by.id('field_start_date'));
   end_dateInput = element(by.id('field_end_date'));
+  start_timeInput = element(by.id('field_start_time'));
+  end_timeInput = element(by.id('field_end_time'));
+  colorInput = element(by.id('field_color'));
+  is_all_dayInput = element(by.id('field_is_all_day'));
+  recurring_dayInput = element(by.id('field_recurring_day'));
 
   calendarSelect = element(by.id('field_calendar'));
 
@@ -70,6 +75,42 @@ export class EventUpdatePage {
 
   async getEnd_dateInput(): Promise<string> {
     return await this.end_dateInput.getAttribute('value');
+  }
+
+  async setStart_timeInput(start_time: string): Promise<void> {
+    await this.start_timeInput.sendKeys(start_time);
+  }
+
+  async getStart_timeInput(): Promise<string> {
+    return await this.start_timeInput.getAttribute('value');
+  }
+
+  async setEnd_timeInput(end_time: string): Promise<void> {
+    await this.end_timeInput.sendKeys(end_time);
+  }
+
+  async getEnd_timeInput(): Promise<string> {
+    return await this.end_timeInput.getAttribute('value');
+  }
+
+  async setColorInput(color: string): Promise<void> {
+    await this.colorInput.sendKeys(color);
+  }
+
+  async getColorInput(): Promise<string> {
+    return await this.colorInput.getAttribute('value');
+  }
+
+  getIs_all_dayInput(): ElementFinder {
+    return this.is_all_dayInput;
+  }
+
+  async setRecurring_dayInput(recurring_day: string): Promise<void> {
+    await this.recurring_dayInput.sendKeys(recurring_day);
+  }
+
+  async getRecurring_dayInput(): Promise<string> {
+    return await this.recurring_dayInput.getAttribute('value');
   }
 
   async calendarSelectLastOption(): Promise<void> {

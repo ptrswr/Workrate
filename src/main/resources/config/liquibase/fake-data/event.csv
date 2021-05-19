@@ -1,11 +1,11 @@
-id;title;start_date;end_date
-1;Tuna integrated deposit;2021-05-14T04:27:19;2021-05-14T06:11:43
-2;BEAC payment THX;2021-05-13T18:15:25;2021-05-14T13:05:38
-3;back-end Account;2021-05-14T06:20:18;2021-05-13T21:10:20
-4;Shoes;2021-05-14T03:59:50;2021-05-14T01:42:31
-5;Estonia monetize;2021-05-14T00:13:30;2021-05-14T02:57:02
-6;copying;2021-05-13T22:17:38;2021-05-14T00:25:54
-7;contingency Corporate connecting;2021-05-13T20:46:08;2021-05-14T14:37:46
-8;indexing Accounts Administrator;2021-05-14T00:15:00;2021-05-14T12:58:12
-9;calculate;2021-05-14T06:35:43;2021-05-13T17:39:25
-10;Auto empowering discrete;2021-05-13T16:43:28;2021-05-13T16:20:34
+id;title;start_date;end_date;start_time;end_time;color;is_all_day;recurring_day
+1;Tuna integrated deposit;2021-05-14T04:27:19;2021-05-14T06:11:43;BEAC payment THX;Awesome Fresh USB;ivory;false;Bedfordshire
+2;architectures Tools;2021-05-14T08:40:21;2021-05-14T00:13:30;stable Chicken;contingency Corporate connecting;ivory;false;indexing Accounts Administrator
+3;Ergonomic payment;2021-05-13T17:39:25;2021-05-13T21:12:05;copy robust;Representative;orange;true;withdrawal withdrawal
+4;Garden;2021-05-14T12:05:43;2021-05-14T12:52:15;Lats;Bedfordshire deposit;mint green;true;Account Fresh
+5;Bike;2021-05-14T05:40:39;2021-05-14T12:32:49;PCI Cuban Fresh;Table Kids;orchid;true;function
+6;Account Organic Direct;2021-05-14T14:56:58;2021-05-14T13:27:59;Sleek American;Hill Prairie;lime;false;North
+7;Steel Salad Georgia;2021-05-14T02:01:09;2021-05-14T00:41:58;SSL panel Tools;PCI e-enable Principal;yellow;false;Koruna purple optical
+8;Sleek Electronics;2021-05-14T05:43:59;2021-05-14T13:44:53;Progressive Cambridgeshire;green open-source;mint green;true;program
+9;invoice;2021-05-14T14:39:37;2021-05-14T02:24:10;local;Rubber optimal;magenta;false;Identity
+10;model;2021-05-14T13:53:38;2021-05-14T03:17:43;zero;Electronics embrace;red;true;Market asynchronous payment

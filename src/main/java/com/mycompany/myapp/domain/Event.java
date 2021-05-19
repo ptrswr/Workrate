@@ -33,6 +33,21 @@ public class Event implements Serializable {
     @Column(name = "end_date")
     private Instant end_date;
 
+    @Column(name = "start_time")
+    private String start_time;
+
+    @Column(name = "end_time")
+    private String end_time;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "is_all_day")
+    private Boolean is_all_day;
+
+    @Column(name = "recurring_day")
+    private String recurring_day;
+
     @ManyToOne
     private Calendar calendar;
 
@@ -89,6 +104,71 @@ public class Event implements Serializable {
         this.end_date = end_date;
     }
 
+    public String getStart_time() {
+        return this.start_time;
+    }
+
+    public Event start_time(String start_time) {
+        this.start_time = start_time;
+        return this;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getEnd_time() {
+        return this.end_time;
+    }
+
+    public Event end_time(String end_time) {
+        this.end_time = end_time;
+        return this;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public Event color(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public Boolean getIs_all_day() {
+        return this.is_all_day;
+    }
+
+    public Event is_all_day(Boolean is_all_day) {
+        this.is_all_day = is_all_day;
+        return this;
+    }
+
+    public void setIs_all_day(Boolean is_all_day) {
+        this.is_all_day = is_all_day;
+    }
+
+    public String getRecurring_day() {
+        return this.recurring_day;
+    }
+
+    public Event recurring_day(String recurring_day) {
+        this.recurring_day = recurring_day;
+        return this;
+    }
+
+    public void setRecurring_day(String recurring_day) {
+        this.recurring_day = recurring_day;
+    }
+
     public Calendar getCalendar() {
         return this.calendar;
     }
@@ -129,6 +209,11 @@ public class Event implements Serializable {
             ", title='" + getTitle() + "'" +
             ", start_date='" + getStart_date() + "'" +
             ", end_date='" + getEnd_date() + "'" +
+            ", start_time='" + getStart_time() + "'" +
+            ", end_time='" + getEnd_time() + "'" +
+            ", color='" + getColor() + "'" +
+            ", is_all_day='" + getIs_all_day() + "'" +
+            ", recurring_day='" + getRecurring_day() + "'" +
             "}";
     }
 }

@@ -25,15 +25,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <createTable tableName="membership">
-            <column name="userid" type="varchar(100)">
-                <constraints  nullable="false"/>
-            </column>
-            <column name="teamid" type="bigint">
-                <constraints nullable="false" />
-            </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
-        </createTable>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

@@ -27,6 +27,11 @@ export class EventUpdateComponent implements OnInit {
     title: [null, [Validators.required]],
     start_date: [null, [Validators.required]],
     end_date: [],
+    start_time: [],
+    end_time: [],
+    color: [],
+    is_all_day: [],
+    recurring_day: [],
     calendar: [],
   });
 
@@ -94,6 +99,11 @@ export class EventUpdateComponent implements OnInit {
       title: event.title,
       start_date: event.start_date ? event.start_date.format(DATE_TIME_FORMAT) : null,
       end_date: event.end_date ? event.end_date.format(DATE_TIME_FORMAT) : null,
+      start_time: event.start_time,
+      end_time: event.end_time,
+      color: event.color,
+      is_all_day: event.is_all_day,
+      recurring_day: event.recurring_day,
       calendar: event.calendar,
     });
 
@@ -119,6 +129,11 @@ export class EventUpdateComponent implements OnInit {
       title: this.editForm.get(['title'])!.value,
       start_date: this.editForm.get(['start_date'])!.value ? dayjs(this.editForm.get(['start_date'])!.value, DATE_TIME_FORMAT) : undefined,
       end_date: this.editForm.get(['end_date'])!.value ? dayjs(this.editForm.get(['end_date'])!.value, DATE_TIME_FORMAT) : undefined,
+      start_time: this.editForm.get(['start_time'])!.value,
+      end_time: this.editForm.get(['end_time'])!.value,
+      color: this.editForm.get(['color'])!.value,
+      is_all_day: this.editForm.get(['is_all_day'])!.value,
+      recurring_day: this.editForm.get(['recurring_day'])!.value,
       calendar: this.editForm.get(['calendar'])!.value,
     };
   }

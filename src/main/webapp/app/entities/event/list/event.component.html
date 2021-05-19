@@ -36,6 +36,11 @@
           <th scope="col"><span>Title</span></th>
           <th scope="col"><span>Start Date</span></th>
           <th scope="col"><span>End Date</span></th>
+          <th scope="col"><span>Start Time</span></th>
+          <th scope="col"><span>End Time</span></th>
+          <th scope="col"><span>Color</span></th>
+          <th scope="col"><span>Is All Day</span></th>
+          <th scope="col"><span>Recurring Day</span></th>
           <th scope="col"><span>Calendar</span></th>
           <th scope="col"></th>
         </tr>
@@ -48,6 +53,11 @@
           <td>{{ event.title }}</td>
           <td>{{ event.start_date | formatMediumDatetime }}</td>
           <td>{{ event.end_date | formatMediumDatetime }}</td>
+          <td>{{ event.start_time }}</td>
+          <td>{{ event.end_time }}</td>
+          <td>{{ event.color }}</td>
+          <td>{{ event.is_all_day }}</td>
+          <td>{{ event.recurring_day }}</td>
           <td>
             <div *ngIf="event.calendar">
               <a [routerLink]="['/calendar', event.calendar?.id, 'view']">{{ event.calendar?.id }}</a>

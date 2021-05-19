@@ -7,7 +7,7 @@
         Added the constraints for entity Team.
     -->
     <changeSet id="20210514150414-2" author="jhipster">
-
+        
         <addForeignKeyConstraint baseColumnNames="calendar_id"
                                  baseTableName="team"
                                  constraintName="fk_team__calendar_id"
@@ -19,25 +19,6 @@
                                  constraintName="fk_team__leader_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-
-        <addForeignKeyConstraint baseColumnNames="userid"
-                                 baseTableName="membership"
-                                 constraintName="fk_member_user_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
-
-        <addForeignKeyConstraint baseColumnNames="teamid"
-                                 baseTableName="membership"
-                                 constraintName="fk_member_team_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="team"/>
-
-        <addForeignKeyConstraint baseColumnNames="calendar_id"
-                                 baseTableName="jhi_user"
-                                 constraintName="fk_user_calendar_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="calendar"/>
-        <addPrimaryKey tableName="membership" columnNames="userid, teamid"/>
 
     </changeSet>
 </databaseChangeLog>

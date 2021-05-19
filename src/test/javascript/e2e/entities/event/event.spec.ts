@@ -46,6 +46,10 @@ describe('Event e2e test', () => {
       eventUpdatePage.setTitleInput('title'),
       eventUpdatePage.setStart_dateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       eventUpdatePage.setEnd_dateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+      eventUpdatePage.setStart_timeInput('start_time'),
+      eventUpdatePage.setEnd_timeInput('end_time'),
+      eventUpdatePage.setColorInput('color'),
+      eventUpdatePage.setRecurring_dayInput('recurring_day'),
       eventUpdatePage.calendarSelectLastOption(),
     ]);
 
@@ -55,6 +59,21 @@ describe('Event e2e test', () => {
       'Expected start_date value to be equals to 2000-12-31'
     );
     expect(await eventUpdatePage.getEnd_dateInput()).to.contain('2001-01-01T02:30', 'Expected end_date value to be equals to 2000-12-31');
+    expect(await eventUpdatePage.getStart_timeInput()).to.eq('start_time', 'Expected Start_time value to be equals to start_time');
+    expect(await eventUpdatePage.getEnd_timeInput()).to.eq('end_time', 'Expected End_time value to be equals to end_time');
+    expect(await eventUpdatePage.getColorInput()).to.eq('color', 'Expected Color value to be equals to color');
+    const selectedIs_all_day = eventUpdatePage.getIs_all_dayInput();
+    if (await selectedIs_all_day.isSelected()) {
+      await eventUpdatePage.getIs_all_dayInput().click();
+      expect(await eventUpdatePage.getIs_all_dayInput().isSelected(), 'Expected is_all_day not to be selected').to.be.false;
+    } else {
+      await eventUpdatePage.getIs_all_dayInput().click();
+      expect(await eventUpdatePage.getIs_all_dayInput().isSelected(), 'Expected is_all_day to be selected').to.be.true;
+    }
+    expect(await eventUpdatePage.getRecurring_dayInput()).to.eq(
+      'recurring_day',
+      'Expected Recurring_day value to be equals to recurring_day'
+    );
 
     await eventUpdatePage.save();
     expect(await eventUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

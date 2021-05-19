@@ -42,10 +42,10 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call Calendar query and add missing value', () => {
         const event: IEvent = { id: 456 };
-        const calendar: ICalendar = { id: 65521 };
+        const calendar: ICalendar = { id: 63979 };
         event.calendar = calendar;
 
-        const calendarCollection: ICalendar[] = [{ id: 81264 }];
+        const calendarCollection: ICalendar[] = [{ id: 13456 }];
         spyOn(calendarService, 'query').and.returnValue(of(new HttpResponse({ body: calendarCollection })));
         const additionalCalendars = [calendar];
         const expectedCollection: ICalendar[] = [...additionalCalendars, ...calendarCollection];
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const event: IEvent = { id: 456 };
-        const calendar: ICalendar = { id: 36847 };
+        const calendar: ICalendar = { id: 22148 };
         event.calendar = calendar;
 
         activatedRoute.data = of({ event });

@@ -57,6 +57,21 @@ public class EventService {
                     if (event.getEnd_date() != null) {
                         existingEvent.setEnd_date(event.getEnd_date());
                     }
+                    if (event.getStart_time() != null) {
+                        existingEvent.setStart_time(event.getStart_time());
+                    }
+                    if (event.getEnd_time() != null) {
+                        existingEvent.setEnd_time(event.getEnd_time());
+                    }
+                    if (event.getColor() != null) {
+                        existingEvent.setColor(event.getColor());
+                    }
+                    if (event.getIs_all_day() != null) {
+                        existingEvent.setIs_all_day(event.getIs_all_day());
+                    }
+                    if (event.getRecurring_day() != null) {
+                        existingEvent.setRecurring_day(event.getRecurring_day());
+                    }
 
                     return existingEvent;
                 }

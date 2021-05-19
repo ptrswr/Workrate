@@ -41,6 +41,21 @@ class EventResourceIT {
     private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_START_TIME = "AAAAAAAAAA";
+    private static final String UPDATED_START_TIME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_END_TIME = "AAAAAAAAAA";
+    private static final String UPDATED_END_TIME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COLOR = "AAAAAAAAAA";
+    private static final String UPDATED_COLOR = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_IS_ALL_DAY = false;
+    private static final Boolean UPDATED_IS_ALL_DAY = true;
+
+    private static final String DEFAULT_RECURRING_DAY = "AAAAAAAAAA";
+    private static final String UPDATED_RECURRING_DAY = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/events";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -65,7 +80,15 @@ class EventResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Event createEntity(EntityManager em) {
-        Event event = new Event().title(DEFAULT_TITLE).start_date(DEFAULT_START_DATE).end_date(DEFAULT_END_DATE);
+        Event event = new Event()
+            .title(DEFAULT_TITLE)
+            .start_date(DEFAULT_START_DATE)
+            .end_date(DEFAULT_END_DATE)
+            .start_time(DEFAULT_START_TIME)
+            .end_time(DEFAULT_END_TIME)
+            .color(DEFAULT_COLOR)
+            .is_all_day(DEFAULT_IS_ALL_DAY)
+            .recurring_day(DEFAULT_RECURRING_DAY);
         return event;
     }
 
@@ -76,7 +99,15 @@ class EventResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Event createUpdatedEntity(EntityManager em) {
-        Event event = new Event().title(UPDATED_TITLE).start_date(UPDATED_START_DATE).end_date(UPDATED_END_DATE);
+        Event event = new Event()
+            .title(UPDATED_TITLE)
+            .start_date(UPDATED_START_DATE)
+            .end_date(UPDATED_END_DATE)
+            .start_time(UPDATED_START_TIME)
+            .end_time(UPDATED_END_TIME)
+            .color(UPDATED_COLOR)
+            .is_all_day(UPDATED_IS_ALL_DAY)
+            .recurring_day(UPDATED_RECURRING_DAY);
         return event;
     }
 
@@ -103,6 +134,11 @@ class EventResourceIT {
         assertThat(testEvent.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testEvent.getStart_date()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testEvent.getEnd_date()).isEqualTo(DEFAULT_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(DEFAULT_END_TIME);
+        assertThat(testEvent.getColor()).isEqualTo(DEFAULT_COLOR);
+        assertThat(testEvent.getIs_all_day()).isEqualTo(DEFAULT_IS_ALL_DAY);
+        assertThat(testEvent.getRecurring_day()).isEqualTo(DEFAULT_RECURRING_DAY);
     }
 
     @Test
@@ -177,7 +213,12 @@ class EventResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].start_date").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].end_date").value(hasItem(DEFAULT_END_DATE.toString())));
+            .andExpect(jsonPath("$.[*].end_date").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].start_time").value(hasItem(DEFAULT_START_TIME)))
+            .andExpect(jsonPath("$.[*].end_time").value(hasItem(DEFAULT_END_TIME)))
+            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR)))
+            .andExpect(jsonPath("$.[*].is_all_day").value(hasItem(DEFAULT_IS_ALL_DAY.booleanValue())))
+            .andExpect(jsonPath("$.[*].recurring_day").value(hasItem(DEFAULT_RECURRING_DAY)));
     }
 
     @Test
@@ -194,7 +235,12 @@ class EventResourceIT {
             .andExpect(jsonPath("$.id").value(event.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.start_date").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.end_date").value(DEFAULT_END_DATE.toString()));
+            .andExpect(jsonPath("$.end_date").value(DEFAULT_END_DATE.toString()))
+            .andExpect(jsonPath("$.start_time").value(DEFAULT_START_TIME))
+            .andExpect(jsonPath("$.end_time").value(DEFAULT_END_TIME))
+            .andExpect(jsonPath("$.color").value(DEFAULT_COLOR))
+            .andExpect(jsonPath("$.is_all_day").value(DEFAULT_IS_ALL_DAY.booleanValue()))
+            .andExpect(jsonPath("$.recurring_day").value(DEFAULT_RECURRING_DAY));
     }
 
     @Test
@@ -216,7 +262,15 @@ class EventResourceIT {
         Event updatedEvent = eventRepository.findById(event.getId()).get();
         // Disconnect from session so that the updates on updatedEvent are not directly saved in db
         em.detach(updatedEvent);
-        updatedEvent.title(UPDATED_TITLE).start_date(UPDATED_START_DATE).end_date(UPDATED_END_DATE);
+        updatedEvent
+            .title(UPDATED_TITLE)
+            .start_date(UPDATED_START_DATE)
+            .end_date(UPDATED_END_DATE)
+            .start_time(UPDATED_START_TIME)
+            .end_time(UPDATED_END_TIME)
+            .color(UPDATED_COLOR)
+            .is_all_day(UPDATED_IS_ALL_DAY)
+            .recurring_day(UPDATED_RECURRING_DAY);
 
         restEventMockMvc
             .perform(
@@ -234,6 +288,11 @@ class EventResourceIT {
         assertThat(testEvent.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testEvent.getStart_date()).isEqualTo(UPDATED_START_DATE);
         assertThat(testEvent.getEnd_date()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(UPDATED_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(UPDATED_END_TIME);
+        assertThat(testEvent.getColor()).isEqualTo(UPDATED_COLOR);
+        assertThat(testEvent.getIs_all_day()).isEqualTo(UPDATED_IS_ALL_DAY);
+        assertThat(testEvent.getRecurring_day()).isEqualTo(UPDATED_RECURRING_DAY);
     }
 
     @Test
@@ -308,7 +367,12 @@ class EventResourceIT {
         Event partialUpdatedEvent = new Event();
         partialUpdatedEvent.setId(event.getId());
 
-        partialUpdatedEvent.title(UPDATED_TITLE).end_date(UPDATED_END_DATE);
+        partialUpdatedEvent
+            .title(UPDATED_TITLE)
+            .end_date(UPDATED_END_DATE)
+            .end_time(UPDATED_END_TIME)
+            .color(UPDATED_COLOR)
+            .recurring_day(UPDATED_RECURRING_DAY);
 
         restEventMockMvc
             .perform(
@@ -326,6 +390,11 @@ class EventResourceIT {
         assertThat(testEvent.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testEvent.getStart_date()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testEvent.getEnd_date()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(UPDATED_END_TIME);
+        assertThat(testEvent.getColor()).isEqualTo(UPDATED_COLOR);
+        assertThat(testEvent.getIs_all_day()).isEqualTo(DEFAULT_IS_ALL_DAY);
+        assertThat(testEvent.getRecurring_day()).isEqualTo(UPDATED_RECURRING_DAY);
     }
 
     @Test
@@ -340,7 +409,15 @@ class EventResourceIT {
         Event partialUpdatedEvent = new Event();
         partialUpdatedEvent.setId(event.getId());
 
-        partialUpdatedEvent.title(UPDATED_TITLE).start_date(UPDATED_START_DATE).end_date(UPDATED_END_DATE);
+        partialUpdatedEvent
+            .title(UPDATED_TITLE)
+            .start_date(UPDATED_START_DATE)
+            .end_date(UPDATED_END_DATE)
+            .start_time(UPDATED_START_TIME)
+            .end_time(UPDATED_END_TIME)
+            .color(UPDATED_COLOR)
+            .is_all_day(UPDATED_IS_ALL_DAY)
+            .recurring_day(UPDATED_RECURRING_DAY);
 
         restEventMockMvc
             .perform(
@@ -358,6 +435,11 @@ class EventResourceIT {
         assertThat(testEvent.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testEvent.getStart_date()).isEqualTo(UPDATED_START_DATE);
         assertThat(testEvent.getEnd_date()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(UPDATED_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(UPDATED_END_TIME);
+        assertThat(testEvent.getColor()).isEqualTo(UPDATED_COLOR);
+        assertThat(testEvent.getIs_all_day()).isEqualTo(UPDATED_IS_ALL_DAY);
+        assertThat(testEvent.getRecurring_day()).isEqualTo(UPDATED_RECURRING_DAY);
     }
 
     @Test

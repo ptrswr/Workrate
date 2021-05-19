@@ -29,6 +29,11 @@ describe('Service Tests', () => {
         title: 'AAAAAAA',
         start_date: currentDate,
         end_date: currentDate,
+        start_time: 'AAAAAAA',
+        end_time: 'AAAAAAA',
+        color: 'AAAAAAA',
+        is_all_day: false,
+        recurring_day: 'AAAAAAA',
       };
     });
 
@@ -81,6 +86,11 @@ describe('Service Tests', () => {
             title: 'BBBBBB',
             start_date: currentDate.format(DATE_TIME_FORMAT),
             end_date: currentDate.format(DATE_TIME_FORMAT),
+            start_time: 'BBBBBB',
+            end_time: 'BBBBBB',
+            color: 'BBBBBB',
+            is_all_day: true,
+            recurring_day: 'BBBBBB',
           },
           elemDefault
         );
@@ -105,6 +115,9 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             end_date: currentDate.format(DATE_TIME_FORMAT),
+            end_time: 'BBBBBB',
+            color: 'BBBBBB',
+            recurring_day: 'BBBBBB',
           },
           new Event()
         );
@@ -133,6 +146,11 @@ describe('Service Tests', () => {
             title: 'BBBBBB',
             start_date: currentDate.format(DATE_TIME_FORMAT),
             end_date: currentDate.format(DATE_TIME_FORMAT),
+            start_time: 'BBBBBB',
+            end_time: 'BBBBBB',
+            color: 'BBBBBB',
+            is_all_day: true,
+            recurring_day: 'BBBBBB',
           },
           elemDefault
         );
@@ -190,7 +208,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Event to an array', () => {
-          const eventArray: IEvent[] = [{ id: 123 }, { id: 456 }, { id: 27546 }];
+          const eventArray: IEvent[] = [{ id: 123 }, { id: 456 }, { id: 49927 }];
           const eventCollection: IEvent[] = [{ id: 123 }];
           expectedResult = service.addEventToCollectionIfMissing(eventCollection, ...eventArray);
           expect(expectedResult).toHaveLength(3);

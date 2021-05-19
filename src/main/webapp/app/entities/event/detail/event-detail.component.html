@@ -26,6 +26,26 @@
         <dd>
           <span>{{ event.end_date | formatMediumDatetime }}</span>
         </dd>
+        <dt><span>Start Time</span></dt>
+        <dd>
+          <span>{{ event.start_time }}</span>
+        </dd>
+        <dt><span>End Time</span></dt>
+        <dd>
+          <span>{{ event.end_time }}</span>
+        </dd>
+        <dt><span>Color</span></dt>
+        <dd>
+          <span>{{ event.color }}</span>
+        </dd>
+        <dt><span>Is All Day</span></dt>
+        <dd>
+          <span>{{ event.is_all_day }}</span>
+        </dd>
+        <dt><span>Recurring Day</span></dt>
+        <dd>
+          <span>{{ event.recurring_day }}</span>
+        </dd>
         <dt><span>Calendar</span></dt>
         <dd>
           <div *ngIf="event.calendar">

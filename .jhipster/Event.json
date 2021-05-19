@@ -13,6 +13,26 @@
     {
       "fieldName": "end_date",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "start_time",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "end_time",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "is_all_day",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "recurring_day",
+      "fieldType": "String"
     }
   ],
   "relationships": [
