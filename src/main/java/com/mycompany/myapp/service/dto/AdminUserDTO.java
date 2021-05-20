@@ -78,6 +78,7 @@ public class AdminUserDTO {
         this.lastModifiedDate = user.getLastModifiedDate();
         this.calendar = user.getCalendar();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+
     }
 
     public String getId() {

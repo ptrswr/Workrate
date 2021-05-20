@@ -1,14 +1,20 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Membership;
 import com.mycompany.myapp.domain.Team;
+import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.MembershipRepository;
 import com.mycompany.myapp.repository.TeamRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.service.TeamService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -36,10 +42,16 @@ public class TeamResource {
     private final TeamService teamService;
 
     private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
+    private final MembershipRepository membershpRepository;
 
-    public TeamResource(TeamService teamService, TeamRepository teamRepository) {
+
+    public TeamResource(TeamService teamService, TeamRepository teamRepository,UserRepository userRepository,MembershipRepository membershpRepository) {
         this.teamService = teamService;
         this.teamRepository = teamRepository;
+        this.userRepository = userRepository;
+        this.membershpRepository = membershpRepository;
+
     }
 
     /**
@@ -92,6 +104,18 @@ public class TeamResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, team.getId().toString()))
             .body(result);
+    }
+    @GetMapping("/teams/user")
+    public List<Team> getAllTeamsForCurrentUser() {
+        User user = userRepository.findCurrentUser();
+         List <Membership> memberships =  membershpRepository.findAll().stream().filter(m -> m.getUserID().equals(user.getId())).collect(Collectors.toList());
+         List<Team> teamList = new ArrayList<>();
+        for (Membership m: memberships) {
+             Optional<Team>  temp = teamRepository.findById(m.getTeamID());
+             temp.ifPresent(teamList::add);
+        }
+        log.debug("REST request to get all Teams");
+        return teamList;
     }
 
     /**

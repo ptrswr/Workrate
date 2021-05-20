@@ -1,14 +1,21 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Calendar;
+import com.mycompany.myapp.domain.Event;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.CalendarRepository;
+import com.mycompany.myapp.repository.EventRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.service.CalendarService;
+import com.mycompany.myapp.service.EventService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -37,9 +44,17 @@ public class CalendarResource {
 
     private final CalendarRepository calendarRepository;
 
-    public CalendarResource(CalendarService calendarService, CalendarRepository calendarRepository) {
+    private final EventService eventService;
+    private final EventRepository eventRepository;
+    private final UserRepository userRepository;
+
+
+    public CalendarResource(CalendarService calendarService, CalendarRepository calendarRepository,UserRepository userRepository, EventRepository eventRepository, EventService eventService) {
         this.calendarService = calendarService;
         this.calendarRepository = calendarRepository;
+        this.eventRepository = eventRepository;
+        this.eventService = eventService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -56,6 +71,21 @@ public class CalendarResource {
             throw new BadRequestAlertException("A new calendar cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Calendar result = calendarService.save(calendar);
+        return ResponseEntity
+            .created(new URI("/api/calendars/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+    @PostMapping("/calendars/user")
+    public ResponseEntity<Calendar> createCalendarWithUser(@Valid @RequestBody Calendar calendar) throws URISyntaxException {
+        log.debug("REST request to save Calendar : {}", calendar);
+        if (calendar.getId() != null) {
+            throw new BadRequestAlertException("A new calendar cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        User user = userRepository.findCurrentUser();
+        user.setCalendar(calendar);
+        Calendar result = calendarService.save(calendar);
+        userRepository.save(user);
         return ResponseEntity
             .created(new URI("/api/calendars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -141,6 +171,21 @@ public class CalendarResource {
     public List<Calendar> getAllCalendars() {
         log.debug("REST request to get all Calendars");
         return calendarService.findAll();
+    }    /**
+     * {@code GET  /calendars} : get all the calendars.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of calendars in body.
+     */
+    @GetMapping("/calendars/all_events/{id}")
+    public List<Event> getAllEventsforCalendar(@PathVariable Long id) {
+        log.debug("REST request to get all Calendars");
+        List <Event> listOfEvents = eventRepository.findAll();
+        List<Event> temp = new ArrayList<>();
+        for (Event list: listOfEvents) {
+            if(list.getCalendar() != null && list.getCalendar().getId().equals(id))
+                temp.add(list);
+        }
+        return temp;
     }
 
     /**
