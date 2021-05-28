@@ -6,6 +6,7 @@ import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
 import java.security.Principal;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,8 +58,8 @@ public class AccountResource {
     public AdminUserDTO getAccount(Principal principal) {
         if (principal instanceof AbstractAuthenticationToken) {
             AdminUserDTO  user = userService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
-            User user_fromDB = userRepository.findCurrentUser();
-            user.setCalendar(user_fromDB.getCalendar());
+            Optional<User> user_fromDB = userRepository.findOneByLogin(user.getLogin());
+            user_fromDB.ifPresent(value -> user.setCalendar(value.getCalendar()));
             return user;
         } else {
             throw new AccountResourceException("User could not be found");

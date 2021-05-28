@@ -76,16 +76,16 @@ public class CalendarResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
-    @PostMapping("/calendars/user")
-    public ResponseEntity<Calendar> createCalendarWithUser(@Valid @RequestBody Calendar calendar) throws URISyntaxException {
+    @PostMapping("/calendars/user/{login}")
+    public ResponseEntity<Calendar> createCalendarWithUser(@Valid @RequestBody Calendar calendar, @PathVariable String login) throws URISyntaxException {
         log.debug("REST request to save Calendar : {}", calendar);
         if (calendar.getId() != null) {
             throw new BadRequestAlertException("A new calendar cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        User user = userRepository.findCurrentUser();
-        user.setCalendar(calendar);
+        Optional<User> user_fromDB = userRepository.findOneByLogin(login);
+        user_fromDB.ifPresent(value -> user_fromDB.get().setCalendar(calendar));
         Calendar result = calendarService.save(calendar);
-        userRepository.save(user);
+        userRepository.save(user_fromDB.get());
         return ResponseEntity
             .created(new URI("/api/calendars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
