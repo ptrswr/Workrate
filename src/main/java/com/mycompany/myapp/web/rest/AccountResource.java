@@ -1,5 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
@@ -31,11 +33,18 @@ public class AccountResource {
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public AccountResource(UserService userService) {
+
+    public AccountResource(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
-
+    @GetMapping("/current/user")
+    @SuppressWarnings("unchecked")
+    public User getCurrentUser() {
+        return userRepository.findCurrentUser();
+    }
     /**
      * {@code GET  /account} : get the current user.
      *
@@ -47,7 +56,10 @@ public class AccountResource {
     @SuppressWarnings("unchecked")
     public AdminUserDTO getAccount(Principal principal) {
         if (principal instanceof AbstractAuthenticationToken) {
-            return userService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
+            AdminUserDTO  user = userService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
+            User user_fromDB = userRepository.findCurrentUser();
+            user.setCalendar(user_fromDB.getCalendar());
+            return user;
         } else {
             throw new AccountResourceException("User could not be found");
         }

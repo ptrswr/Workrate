@@ -27,6 +27,11 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findOneWithAuthoritiesByLogin(String login);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+
     @Query("select user from User user where user.login = ?#{principal.preferredUsername}")
     User findCurrentUser();
+
+    @Query("select user from User user where user.id = ?#{Id}")
+    User findCurrentUserById(String Id);
 }
+

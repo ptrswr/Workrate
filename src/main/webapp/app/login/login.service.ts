@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Location } from '@angular/common';
+import {Injectable} from '@angular/core';
+import {Location} from '@angular/common';
 
-import { AuthServerProvider } from 'app/core/auth/auth-session.service';
-import { Logout } from './logout.model';
+import {AuthServerProvider} from 'app/core/auth/auth-session.service';
+import {Logout} from './logout.model';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -18,7 +18,6 @@ export class LoginService {
     this.authServerProvider.logout().subscribe((logout: Logout) => {
       let logoutUrl = logout.logoutUrl;
       const redirectUri = `${location.origin}${this.location.prepareExternalUrl('/')}`;
-
       // if Keycloak, uri has protocol/openid-connect/token
       if (logoutUrl.includes('/protocol')) {
         logoutUrl = logoutUrl + '?redirect_uri=' + redirectUri;
