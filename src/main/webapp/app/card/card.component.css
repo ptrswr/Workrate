@@ -1,0 +1,63 @@
+.outer-container {
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 6px 12px 22px -11px rgba(0, 0, 0, 0.77);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-elem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
+  vertical-align: middle;
+  width: 40%;
+  height: 40%;
+  border-radius: 80%;
+  border: 1px solid var(--primary-border-color);
+}
+
+.name {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--primary-text-color);
+  font-weight: 700;
+  text-align: center;
+}
+
+.info-section {
+  margin-top: 1.5rem;
+}
+
+.section-elem {
+  border-top: 1px solid var(--separator-color);
+}
+
+.section-elem:nth-last-child(1) {
+  border-bottom: 1px solid var(--separator-color);
+  margin-bottom: 1.5rem;
+}
+
+.company-name {
+  text-align: center;
+  color: var(--secondary-text-color);
+}
+
+.label {
+  color: var(--primary-text-color);
+  font-weight: 500;
+}
+
+.info {
+  color: var(--secondary-text-color);
+}

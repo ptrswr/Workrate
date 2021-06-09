@@ -1,0 +1,15 @@
+.outer-container {
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  height: auto;
+  box-shadow: 6px 12px 22px -11px rgba(0, 0, 0, 0.77);
+  padding: 0.5rem 0.1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .outer-container {
+    padding: 0.5rem;
+  }
+}

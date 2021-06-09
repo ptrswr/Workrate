@@ -1,30 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { errorRoute } from './layouts/error/error.route';
-import { navbarRoute } from './layouts/navbar/navbar.route';
-import { DEBUG_INFO_ENABLED } from 'app/app.constants';
-import { Authority } from 'app/config/authority.constants';
+import { Routes, RouterModule } from '@angular/router';
+import { TeamComponent } from './team/team.component';
+import { UserCalendarComponent } from './user-calendar/user-calendar.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
-import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
-const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
+const routes: Routes = [
+  { path: '', component: UserCalendarComponent, canActivate: [AuthGuardService] },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'team', component: TeamComponent, canActivate: [AuthGuardService] },
+  { path: '**', redirectTo: '' },
+];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(
-      [
-        {
-          path: 'admin',
-          data: {
-            authorities: [Authority.ADMIN],
-          },
-          canActivate: [UserRouteAccessService],
-          loadChildren: () => import('./admin/admin-routing.module').then(m => m.AdminRoutingModule),
-        },
-        ...LAYOUT_ROUTES,
-      ],
-      { enableTracing: DEBUG_INFO_ENABLED }
-    ),
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
   ],
   exports: [RouterModule],
 })

@@ -1,0 +1,25 @@
+<div class="outer-container">
+  <div class="profile-img">
+    <img src="../../assets/{{ user.id }}.png" alt="" />
+  </div>
+  <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
+  <div class="company-name">Apple Inc.</div>
+  <div class="info-section">
+    <div class="section-elem">
+      <p class="label">Login</p>
+      <p class="info">{{ user.login }}</p>
+    </div>
+    <div class="section-elem">
+      <p class="label">Email</p>
+      <p class="info">{{ user.email }}</p>
+    </div>
+    <div class="section-elem">
+      <p class="label">Joined</p>
+      <p class="info">March, 2017</p>
+    </div>
+    <div class="section-elem">
+      <p class="label">Role</p>
+      <p class="info">CEO</p>
+    </div>
+  </div>
+</div>

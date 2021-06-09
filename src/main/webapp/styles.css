@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --body-font: 'Poppins', sans-serif;
+
+  --primary-background-color: #fbfbfc;
+  --primary-border-color: #e1e4e9;
+  --primary-text-color: #192445;
+  --secondary-text-color: #5c7082;
+  --separator-color: #a3a8ac;
+
+  --button-text-color: #2e53d8;
+
+  --ng-color: #2196f3;
+
+  --header-height: 4rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1920px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-column-gap: 2rem;
+  width: calc(100% - 2rem);
+  margin-left: auto;
+  margin-right: auto;
+}

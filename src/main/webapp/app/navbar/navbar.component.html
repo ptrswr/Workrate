@@ -1,0 +1,42 @@
+<div class="header">
+  <nav class="nav grid">
+    <div class="logo-wrapper">
+      <a routerLink="">
+        <img src="../../assets/logo.png" alt="" />
+      </a>
+    </div>
+
+    <div class="nav-menu" id="navmenu" [ngClass]="menuVisible ? 'show' : 'hide'">
+      <ul class="nav-list">
+        <a routerLink="">
+          <li class="nav-item">
+            <i-feather name="calendar" class="nav-icon"></i-feather>
+            <p class="nav-link">Calendar</p>
+          </li>
+        </a>
+        <!-- <a routerLink="/team">
+                    <li class="nav-item">
+                        <i-feather name="users" class="nav-icon"></i-feather>
+                        <p class="nav-link">Team</p>
+                    </li>
+                </a> -->
+        <a routerLink="/profile">
+          <li class="nav-item">
+            <i-feather name="user" class="nav-icon"></i-feather>
+            <p class="nav-link">Profile</p>
+          </li>
+        </a>
+        <a (click)="login()">
+          <li class="nav-item">
+            <i-feather name="power" class="nav-icon"></i-feather>
+            <p class="nav-link">Sign out</p>
+          </li>
+        </a>
+      </ul>
+    </div>
+
+    <div class="nav-toggle" id="navtoggle" (click)="showSidebar()">
+      <i-feather name="align-justify"></i-feather>
+    </div>
+  </nav>
+</div>

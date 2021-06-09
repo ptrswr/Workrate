@@ -1,0 +1,39 @@
+.wrapper {
+  margin-bottom: 1rem;
+}
+
+.user-details {
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 6px 12px 22px -11px rgba(0, 0, 0, 0.77);
+  margin-bottom: 6rem;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary-text-color);
+}
+
+.field {
+  margin: 1rem 0;
+}
+
+.custom-button {
+  color: white;
+  background-color: var(--ng-color);
+  cursor: pointer;
+  border: 1px solid var(--ng-color);
+  border-radius: 5px !important;
+  padding: 1.25rem 2rem;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    grid-template-columns: 28% 70%;
+  }
+}

@@ -1,0 +1,32 @@
+.outer-container {
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 6px 12px 22px -11px rgba(0, 0, 0, 0.77);
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--primary-text-color);
+  margin-bottom: 1rem;
+}
+
+.input-wrapper {
+  margin: 1rem 0;
+}
+
+.label {
+  color: var(--secondary-text-color);
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+.radio-group {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}

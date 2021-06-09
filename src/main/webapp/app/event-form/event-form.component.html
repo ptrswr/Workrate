@@ -1,0 +1,65 @@
+<form [formGroup]="addEventForm" class="outer-container">
+  <div class="p-fluid p-grid">
+    <div class="header">Add an event</div>
+    <div class="p-field p-col-12 p-md-4 input-wrapper">
+      <label for="inputtext" class="label">Name</label>
+      <input
+        formControlName="eventName"
+        type="text"
+        id="inputtext"
+        [ngClass]="{ 'ng-invalid ng-dirty': submitted && form.eventName.errors }"
+        pInputText
+      />
+      <div *ngIf="submitted && form.eventName.errors?.required">
+        <small class="p-error">Event name invalid</small>
+      </div>
+    </div>
+    <div class="p-field p-col-12 p-md-4 input-wrapper">
+      <label for="startDate" class="label">Start date</label>
+      <p-calendar
+        formControlName="startDate"
+        [showIcon]="true"
+        inputId="startDate"
+        dateFormat="dd.mm.yy"
+        [showTime]="true"
+        [ngClass]="{ 'ng-invalid ng-dirty': submitted && form.startDate.errors }"
+      >
+      </p-calendar>
+      <div *ngIf="submitted && form.startDate.errors?.required">
+        <small class="p-error">Start date invalid</small>
+      </div>
+    </div>
+    <div class="p-field p-col-12 p-md-4 input-wrapper">
+      <div class="radio-group">
+        <label for="isallday" class="label">All day event</label>
+        <p-inputSwitch formControlName="isAllDay"></p-inputSwitch>
+      </div>
+    </div>
+    <div class="p-field p-col-12 p-md-4 input-wrapper">
+      <div class="radio-group">
+        <label for="isallday" class="label">Color</label>
+        <p-colorPicker formControlName="backgroundColor"></p-colorPicker>
+      </div>
+    </div>
+    <div class="p-field p-col-12 p-md-4 input-wrapper">
+      <label for="endDate" class="label">End date</label>
+      <p-calendar
+        formControlName="endDate"
+        [showIcon]="true"
+        inputId="endDate"
+        dateFormat="dd.mm.yy"
+        [showTime]="true"
+        [ngClass]="{ 'ng-invalid ng-dirty': submitted && form.endDate.errors }"
+        [disabled]="form.isAllDay.value"
+      >
+      </p-calendar>
+      <div *ngIf="submitted && form.endDate.errors?.required">
+        <small class="p-error">End date invalid</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <p-button label="Add event" icon="pi pi-check" iconPos="left" (click)="onSubmit()"></p-button>
+  </div>
+</form>

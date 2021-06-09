@@ -1,58 +1,68 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { IconsModule } from './icons/icons.module';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { HttpClientModule } from '@angular/common/http';
-import locale from '@angular/common/locales/en';
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { NgxWebstorageModule } from 'ngx-webstorage';
-import * as dayjs from 'dayjs';
-import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { initializer } from '../utils/keycloak-init';
 
-import { SERVER_API_URL } from './app.constants';
-import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import './config/dayjs';
-import { SharedModule } from 'app/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './home/home.module';
-import { EntityRoutingModule } from './entities/entity-routing.module';
-// jhipster-needle-angular-add-module-import JHipster will add new module here
-import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
-import { fontAwesomeIcons } from './config/font-awesome-icons';
-import { httpInterceptorProviders } from 'app/core/interceptor/index';
-import { MainComponent } from './layouts/main/main.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
-import { ErrorComponent } from './layouts/error/error.component';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserCalendarComponent } from './user-calendar/user-calendar.component';
+import { CardComponent } from './card/card.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { EventFormComponent } from './event-form/event-form.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TeamComponent } from './team/team.component';
+import { ChartModule } from 'primeng/chart';
+
+FullCalendarModule.registerPlugins([dayGridPlugin, interactionPlugin, timeGridPlugin]);
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    UserCalendarComponent,
+    CardComponent,
+    CalendarComponent,
+    EventFormComponent,
+    UserProfileComponent,
+    TeamComponent,
+  ],
   imports: [
     BrowserModule,
-    SharedModule,
-    HomeModule,
-    // jhipster-needle-angular-add-module JHipster will add new module here
-    EntityRoutingModule,
     AppRoutingModule,
-    // Set this to true to enable service worker (PWA)
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+    FullCalendarModule,
+    IconsModule,
+    InputTextModule,
+    CalendarModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputSwitchModule,
+    ColorPickerModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
+    KeycloakAngularModule,
+    ChartModule,
   ],
   providers: [
-    Title,
-    { provide: LOCALE_ID, useValue: 'en' },
-    { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
-    httpInterceptorProviders,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      deps: [KeycloakService],
+      multi: true,
+    },
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
-  bootstrap: [MainComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
-    applicationConfigService.setEndpointPrefix(SERVER_API_URL);
-    registerLocaleData(locale);
-    iconLibrary.addIcons(...fontAwesomeIcons);
-    dpConfig.minDate = { year: dayjs().subtract(100, 'year').year(), month: 1, day: 1 };
-  }
-}
+export class AppModule {}

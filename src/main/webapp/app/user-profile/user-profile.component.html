@@ -1,0 +1,7 @@
+<div class="container wrapper" *ngIf="user">
+  <app-card [user]="user"></app-card>
+  <div class="p-fluid p-formgrid p-grid user-details">
+    <p class="header">Latest stats</p>
+    <p-chart type="line" [data]="chartData"></p-chart>
+  </div>
+</div>
