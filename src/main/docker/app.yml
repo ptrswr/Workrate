@@ -8,7 +8,9 @@ services:
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://workrate-postgresql:5432/Workrate
+#      - SPRING_DATASOURCE_URL=jdbc:h2:file:./target/h2db/db/workrate
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://workrate-postgresql:5432/Workrate
+#      - SPRING_LIQUIBASE_URL=jdbc:h2:file:./target/h2db/db/workrate
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
@@ -16,11 +18,11 @@ services:
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
-      - 127.0.0.1:8080:8080
+      - 8080:8080
   workrate-postgresql:
     image: postgres:13.2
-    # volumes:
-    #   - ~/volumes/jhipster/Workrate/postgresql/:/var/lib/postgresql/data/
+#     volumes:
+#       - ~/volumes/jhipster/Workrate/postgresql/:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=Workrate
       - POSTGRES_PASSWORD=
@@ -55,3 +57,8 @@ services:
       - 127.0.0.1:9080:9080
       - 127.0.0.1:9443:9443
       - 127.0.0.1:10990:10990
+  angular-front:
+    image: 246764/web:1.0.8
+    ports:
+      - 127.0.0.1:4200:4200
+
