@@ -1,7 +1,7 @@
 # Workrate
 
 Web application made for simpler task and time management in small companies.
-Enaabled SSO login and full containerization.
+Enabled SSO login and full containerization.
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
