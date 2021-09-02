@@ -1,7 +1,7 @@
 # Workrate
 
-This application was generated using JHipster 7.0.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.0.0](https://www.jhipster.tech/documentation-archive/v7.0.0).
-
+Web application made for simpler task and time management in small companies.
+Enaabled SSO login and full containerization.
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
